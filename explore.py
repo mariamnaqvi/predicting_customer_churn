@@ -111,7 +111,14 @@ def generate_boxplot(train,target, var):
     plt.show()
 
 
-def explore_bivariate(train, target, cat_vars, quant_vars):
+def get_mann_whitney(train, target, quant_var, alternative_h):
+    x = train[train[target] == 0][quant_var]
+    y = train[train[target] == 1][quant_var]
+    statistic, pvalue = stats.mannwhitneyu(x, y, alternative_h)
+    return statistic, pvalue
+
+
+def explore_bivariate(train, target, cat_vars, quant_vars, alternative_h):
     '''
     This function takes in takes in a dataframe, the name of the binary target variable, a list of 
     the names of the categorical variables and a list of the names of the quantitative variables.
@@ -121,14 +128,21 @@ def explore_bivariate(train, target, cat_vars, quant_vars):
     variable are tested between each class in the target using Mann-Whitney. Finally, a boxplot
     and a swarmplot of the target with the quantitative variable are returned.
     '''
-    # bar plot with overall horizontal line
     
     for var in cat_vars:
+        # produces the frequency table
         generate_freq_table(train, var)
+        # bar plot with overall horizontal line
         generate_barplot(train, target, var)
     for var in quant_vars:
+        # creates a histogram
         generate_hist(train, var)
+        # provides summary statistics
         generate_desc_stats(train, var)
-        generate_boxplot(train,target, var) 
+        # creates boxplot
+        generate_boxplot(train,target, var)
+        # performs mann whitney test -  options are 'two-sided' or 'one-sided'
+        s, p = get_mann_whitney(train, target, var, alternative_h)
+        print (f'Mann Whitney for {var}: statistic = {s}, p-value = {p}')
 
         
