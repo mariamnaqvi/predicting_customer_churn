@@ -17,7 +17,7 @@ def get_telco_data(cached=False):
         FROM customers 
         JOIN contract_types USING (contract_type_id)
         JOIN internet_service_types USING (internet_service_type_id)
-        JOIN payment_tyoes USING (payment_type_id);
+        JOIN payment_types USING (payment_type_id);
         '''
         telco_df = pd.read_sql(sql_query, get_db_url('telco_churn'))
          #also cache the data we read from the db, to a file on disk
