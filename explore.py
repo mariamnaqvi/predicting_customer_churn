@@ -22,7 +22,7 @@ def train_validate_test_split(df, target, seed=123):
     '''
     train, test = train_test_split(df, test_size = 0.2, random_state = seed,
                                   stratify = df[target])
-    train, validate = train_test_split(df, train_size = 0.7, random_state = seed,
+    train, validate = train_test_split(train, train_size = 0.7, random_state = seed,
                                   stratify = train[target])
     return train, validate, test
 
@@ -42,8 +42,8 @@ def explore_univariate(train, cat_vars, quant_vars):
          pd.DataFrame({var: labels,
                       'Count': train[var].value_counts(normalize=False), 
                       'Percent': round(train[var].value_counts(normalize=True)*100,2)}))
-    print(frequency_table)
-    print('\n')
+        print(frequency_table)
+        print('\n')
     
     # plot frequencies for each categorical variable
     for var in cat_vars: 
@@ -111,11 +111,11 @@ def generate_boxplot(train,target, var):
     plt.show()
 
 
-def get_mann_whitney(train, target, quant_var, alternative_h):
-    x = train[train[target] == 0][quant_var]
-    y = train[train[target] == 1][quant_var]
-    statistic, pvalue = stats.mannwhitneyu(x, y, alternative_h)
-    return statistic, pvalue
+# def get_mann_whitney(train, target, quant_var, alternative_h):
+#     x = train[train[target] == 0][quant_var]
+#     y = train[train[target] == 1][quant_var]
+#     statistic, pvalue = stats.mannwhitneyu(x, y, alternative_h)
+#     return statistic, pvalue
 
 
 def explore_bivariate(train, target, cat_vars, quant_vars, alternative_h):
@@ -142,7 +142,7 @@ def explore_bivariate(train, target, cat_vars, quant_vars, alternative_h):
         # creates boxplot
         generate_boxplot(train,target, var)
         # performs mann whitney test -  options are 'two-sided' or 'one-sided'
-        s, p = get_mann_whitney(train, target, var, alternative_h)
-        print (f'Mann Whitney for {var}: statistic = {s}, p-value = {p}')
+#         s, p = get_mann_whitney(train, target, var, alternative_h)
+#         print (f'Mann Whitney for {var}: statistic = {s}, p-value = {p}')
 
         
