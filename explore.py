@@ -65,7 +65,7 @@ def explore_univariate(train, cat_vars, quant_vars):
         h = train[var].hist()
         h.grid(False)
         plt.ylabel(var)
-        plt.title('Histogram of ' + var)
+        plt.title('Distribution of ' + var)
         plt.show()
      
     # print summary statistics for each quantitative variable
@@ -76,6 +76,7 @@ def explore_univariate(train, cat_vars, quant_vars):
 
 
 def generate_freq_table(train, var):
+    print ('Frequency Table of ' + var )
     labels = train[var].unique()
     freq_table = pd.DataFrame({var: labels,
                               'count': train[var].value_counts(),
@@ -89,25 +90,28 @@ def generate_barplot(train, target, var):
     overall_mean = train[target].mean()
     sns.barplot(var, target, data=train, alpha =0.5)
     plt.xlabel('')
-    plt.ylabel(target)
+    plt.ylabel('Churn Rate')
     plt.title('Bar plot of ' + var + ' vs ' + target)
     plt.axhline(overall_mean, ls = '--', color = 'grey')
     plt.show()
 
 
 def generate_hist(train, var):
+    print ('Distribution of ' + var)
     ax = train[var].hist()
     ax.grid(False)
     plt.show()
 
 
 def generate_desc_stats(train, var):
+    print ('Summary Statistics for ' + var)
     print(train[var].describe())
 
 
 def generate_boxplot(train,target, var):
     plt.figure(figsize=(10,5))
     sns.boxplot(y=var, x=target, data=train)
+    plt.title('Boxplot of ' + var)
     plt.show()
 
 
