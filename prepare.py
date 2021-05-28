@@ -10,9 +10,13 @@ def prep_telco_data(df):
     # returns 0 rows
     if num_dups > 0:
         print(f'There are {num_dups} duplicate rows in your dataset - these will be dropped.')
+
+        print ('----------------')
         df = df.drop_duplicates()
     else:
         print(f'There are no duplicate rows in your dataset.')
+
+        print('----------------')
 
     
     
@@ -24,6 +28,8 @@ def prep_telco_data(df):
     # change total charges to float 
     df.total_charges = df.total_charges.astype(float)
     print(f'Total charges has been converted from object to a float data type.')
+
+    print('----------------')
 
 
     #----------------------#
@@ -89,13 +95,21 @@ def prep_telco_data(df):
      # split data into train, validate, test dfs stratify churn
     train, validate, test = split_telco(df, 'churned', seed=123)
     
-    print(f'''
-    Shape of train split: {train.shape}
-    Shape of test split: {train.shape}
-    Shape of validate split: {train.shape}
+    train.info()
 
-    {train.info()}
-     ''')
+    print ('----------------')
+
+    print(f'Shape of train split: {train.shape}')
+
+    print ('----------------')
+
+    print(f'Shape of test split: {train.shape}')
+
+    print ('----------------')
+
+    print(f'Shape of validate split: {train.shape}')
+
+    print ('----------------')
     
     return train, validate, test
           
@@ -116,4 +130,5 @@ def split_telco(df, target, seed = 123):
                                   stratify = df[target])
     train, validate = train_test_split(train, train_size = 0.7, random_state = seed,
                                   stratify = train[target])
+                                 
     return train, validate, test
