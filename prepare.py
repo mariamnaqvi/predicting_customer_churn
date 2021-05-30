@@ -5,6 +5,16 @@ from sklearn.model_selection import train_test_split
 # function to clean original df
 
 def prep_telco_data(df):
+    '''
+    Initial data preparation function. Given a dataframe df, this function performs a
+    number of clean-up tasks in preparation for further analysis, including:
+    * detecting and removing duplicate records
+    * converting columns to the most appropriate datatype
+    * combining similar columns to remove redundant/duplicate data
+    * one-hot encoding columns to reduce the column count
+    Finally, this function will call the split_telco function to split the data into
+    three sets - train, test and validate. Those sets will be returned to the caller.
+    '''
     # check for duplicates 
     num_dups = df.duplicated().sum()
     # returns 0 rows
