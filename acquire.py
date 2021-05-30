@@ -31,63 +31,34 @@ def get_telco_data(cached=False):
     # return our dataframe regardless of its origin
     return telco_df
 
-def get_numeric_cols(df):
-    '''
-    
-    '''
-    numeric_cols = df.columns[[df[col].dtype != 'O' for col in df.columns]]
-    return numeric_cols.to_list()
-#     for col in numeric_cols:
-#         plot_hist(df, col)
-    
-    
-def plot_hist(df, col):    
-    plt.title(f'Distribution of {col}')
-    plt.hist(df[col])
-    plt.show()
 
-    
-def plot_bar(df, col):    
-    print('Bar Plot of ' + col)
-#     plt.hist(df[col])
-#     plt.show()
-    
-def get_object_cols(df):
-    '''
-    
-    '''
-    obj_cols = df.columns[[df[col].dtype == 'O' for col in df.columns]]
-    print(obj_cols.to_list())
-#     for col in obj_cols:
-#         plot_bar(df, col)
 
 def get_data_summary(df):
     print(f'The telco dataframe has\033[1m {df.shape[0]} rows and {df.shape[1]} columns \033[0m.')
     print('')
+    print('-------------------')
+
     print(f'There are total of {df.isna().sum().sum()} missing values in the entire dataframe.')
     print('')
-    print('\033[1m Here are the first 5 rows of our dataset \033[0m')
-    print('')
-    print(df.head())
+    print('-------------------')
+
     print(df.info())
     print('')
-    print(f'Here are the numeric columns in the dataframe')
-    get_numeric_cols(df)
-    print(f'Here are the object columns in the dataframe: {get_object_cols(df)}')
+    print('-------------------')
+    
     print('\033[1m Here are the summary statistics of our dataset \033[0m')
     print(df.describe())
+    print('-------------------')
+
     print('Here are the categories and their relative proportions')
     # check different categories and proportions of each category for object type cols
+    ignore_vars = ['customer_id','tenure', 'monthly_charges','total_charges']
     for col in df.columns:
-        print(df[col].value_counts())
-        print('-------------------')
-        print('')
-        print(f'proportions of {col}')
-        print('')
-        print(df[col].value_counts(normalize=True,dropna=False))
-        print('-------------------')
+        if col not in ignore_vars:
+            print(df[col].value_counts())
+            print('')
+            print(f'proportions of {col}')
+            print('')
+            print(df[col].value_counts(normalize=True,dropna=False))
+            print('-------------------')
         
-def get_viz(df):
-    numeric_cols = get_numeric_cols(df)
-    for col in numeric_cols:
-        plot_hist(df, col)
