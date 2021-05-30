@@ -24,6 +24,7 @@ def prep_telco_data(df):
     df['total_charges'] = df.total_charges.replace(" ", np.nan)
     # changing total charges of new customers to their monthly charges
     df['total_charges'] = df.total_charges.fillna(value=df.monthly_charges)    # new_customers = df['total_charges'].value_counts(dropna=False) # 11 customers who have not been charged and so total charges is empty
+    print(f'The empty string values have been filled with monthly_charges values')
     
     # change total charges to float 
     df.total_charges = df.total_charges.astype(float)
@@ -40,8 +41,10 @@ def prep_telco_data(df):
     # 0 is month to month 
     # 1 is 1 year contract
     # 2 is 2 year contract
-
     df['en_contract_type'] = df.contract_type_id.map({1:0, 2:1, 3:2})
+
+    # separate column for month to month contracts
+    df['en_monthly_contract'] = df.contract_type_id.map({1:1, 2:0, 3:0})
 
     df['en_multiple_lines'] = df.multiple_lines.map({'Yes':1, 'No':0, 'No phone service':0})
 
