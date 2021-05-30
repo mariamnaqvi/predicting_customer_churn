@@ -17,16 +17,35 @@ Perform modeling, analysis and testing to verify the accuracy of a classificatio
 Provide recommendations and suggestions to reduce overall customer churn and increase Telco’s revenue
 
 ## Initial Hypotheses
-Hypotheses 1:
-H0:
-H1: 
-In this case, I chose to…
+*Hypotheses 1:* I accepted/rejected the null hypotheses; there is a difference in churn based on monthly charges
+* Confidence level = 0.99
+* Alpha = 1 - Confidence level = 0.01
+* H<sub>0</sub>: Mean monthly charges of customers who churned = Mean of monthly charges of all customers
+* H<sub>1</sub>: Mean monthly charges of customers who churned > Mean of monthly charges of all customers
 
+*Hypotheses 2:* I accepted/rejected the null hypotheses; there is a difference in churn based on customers using fiber optic internet
+* Confidence level = 0.99 
+* Alpha = 1 - Confidence level = 0.01
+* H<sub>0</sub>: Churn Rate is independent of having fiber optic internet
+* H<sub>1</sub>: Churn Rate is dependent on having fiber optic internet
 
-Hypotheses 2:
-H0: 
-H1: 
-In the case of the second hypothesis, I believed that…
+*Hypotheses 3:* I accepted/rejected the null hypotheses; there is a difference in churn based on payment type
+* Confidence level = 0.99 
+* Alpha = 1 - Confidence level = 0.01
+* H<sub>0</sub>: Churn is independent of payment type
+* H<sub>1</sub>: Churn is not independent of payment type
+
+*Hypotheses 4:* I accepted/rejected the null hypotheses; there is a difference in churn based on tenure and monthly charges
+* Confidence level = 0.99
+* Alpha = 1 - Confidence level = 0.01
+* H<sub>0</sub>: There is no linear correlation between tenure and monthly charges.
+* H<sub>1</sub>: There is a linear correlation between tenure and monthly charges
+
+*Hypotheses 5:* I accepted/rejected the null hypotheses; there is a difference in churn based on contract type 
+* Confidence level = 0.99 
+* Alpha = 1 - Confidence level = 0.01
+* H<sub>0</sub>: Churn is independent of contract type
+* H<sub>1</sub>: Churn is not independent of contract type
 
 ## Data Dictionary
 The following categories were initially collected from the database:
@@ -69,7 +88,20 @@ en_has_DSL | int64 | encoded representation of whether or not the customer has D
 has_internet | int64 | encoded representation of the whether or not the customer has internet | 0 = No; 1 = Fiber Optic or DSL
 
 ## Project Planning
-### Create a reusable component to acquire data from the CodeUp database
+
+The overall process followed in this project, is as follows:
+1. Plan
+2. Acquire
+3. Prepare
+4. Explore
+5. Model
+6. Deliver
+
+### 1. Plan
+* Perform preliminary examination of the dataset
+* Collect database details (connection information and credentials)
+
+### 2. Acquire: Create a reusable component to acquire data from the CodeUp database
 * This is accomplished using a python script named “acquire.py”. It makes use of stored credentials (via env.py) to connect to the CodeUp database, and collects data using a SQL query from the following tables:
 1. Customers
 2. Contract_types
@@ -83,16 +115,33 @@ has_internet | int64 | encoded representation of the whether or not the customer
     * A description of the retrieved data
     * A list of the collected categories, and the proportional size of each
 
-### Create a reusable component to prepare the data for processing and statistical analysis
+### 3. Prepare: Create a reusable component to prepare the data for processing and statistical analysis
 * Most of the code was written into the file named “prepare.py”, which performs the following processes:
-* Look for (and remove) duplicate records from the incoming data set
-* Replace null or empty values (primarily for the monthly_charges column, which contained empty values)
-* Convert data to an optimal format. 
-    * For example, total_charges was stored as an object - however, this column represents a dollar amount, and converting it to a float will eliminate issues during analysis
-* Create a number of new features (“columns”) representing the existing data in encoded form
+	* Look for (and remove) duplicate records from the incoming data set
+	* Replace null or empty values (primarily for the monthly_charges column, which contained empty values)
+	* Convert data to an optimal format. 
+    		* For example, total_charges was stored as an object - however, this column represents a dollar amount, and converting it to a float will eliminate issues during analysis
+	* Create a number of new features (“columns”) representing the existing data in encoded form
 	* The encoded data format will make analysis more straightforward, and eliminates redundant values, resulting in clear binary values
 
-*For more details, please view the Kanban board for this project here: <LINK>*
+### 4. Explore: Create a reusable component to explore the data set and derive key conclusions and takeaways
+* This code was saved in the "explore.py" script, which performs the following processes:
+	* aid in univariate analysis, by generating bar plot and histograms of certain variabls
+	* aid in bivariate analysis, by generating barplots, countplots and boxplots of certain variables
+	* aid in multivariate analysis, by generating box plots of combinations of certain varibales 
+* Examine churn rate as a function of the tenure of Telco's customers
+* Perform statistical analysis of the plots generated in this phase
+* Form different hypotheses, execute tests and examine resulting plots
+	* Compute the t-statistic and p-value, using these to validate (or invalidate) our hypotheses  
+	
+### 5. Model
+* Generate a baseline, against which all models will be evaluated
+* Explore the set of variables and deduce which has the highest level of correlation to churn
+	* use these selections to generate multiple models to help predict churn
+* Execute each model, tune, validate, and compare to the baseline
+
+### 6. Deliver 
+* Output findings to a csv file - in this case, "predictions.csv"
 
 ## To recreate
 Simply clone the project locally and create an env.py file in the same folder as the cloned code. The format should be as follows:
@@ -116,6 +165,11 @@ Next, open the Jupyter notebook titled “final_report_telco” and execute the 
 
 
 ## Takeaways
-
+During the analysis process, I made use of the following classification models:
+1. Decision Tree
+2. Random Forest
+3. KNN
+4. Logistic Regression
+My validation results indicated that the Logistic Regression model provided the highest accuracy in terms of churn prediction. It provided an accuracy of *VALUE*, which outperformed the baseline by *DIFFERENCE TO BASELINE*
 
 ## Next Steps
