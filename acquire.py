@@ -34,18 +34,22 @@ def get_telco_data(cached=False):
 
 
 def get_data_summary(df):
+    # Print out the "shape" of our dataframe - the rows and columns we have to work with
     print(f'The telco dataframe has\033[1m {df.shape[0]} rows and {df.shape[1]} columns \033[0m.')
     print('')
     print('-------------------')
 
+    # print the number of missing rows in our dataframe
     print(f'There are total of {df.isna().sum().sum()} missing values in the entire dataframe.')
     print('')
     print('-------------------')
 
+    # print some information regarding our dataframe
     print(df.info())
     print('')
     print('-------------------')
     
+    # print out summary stats for our dataset
     print('\033[1m Here are the summary statistics of our dataset \033[0m')
     print(df.describe())
     print('-------------------')
