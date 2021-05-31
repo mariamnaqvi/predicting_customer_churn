@@ -13,7 +13,8 @@ def prep_telco_data(df):
     * combining similar columns to remove redundant/duplicate data
     * one-hot encoding columns to reduce the column count
     Finally, this function will call the split_telco function to split the data into
-    three sets - train, test and validate. Those sets will be returned to the caller.
+    three sets - train, test and validate. It returns the train, validate and test splits and also 
+    prints the shape of each.
     '''
     # check for duplicates 
     num_dups = df.duplicated().sum()
@@ -22,6 +23,7 @@ def prep_telco_data(df):
         print(f'There are {num_dups} duplicate rows in your dataset - these will be dropped.')
 
         print ('----------------')
+        # remove duplicates if found
         df = df.drop_duplicates()
     else:
         # otherwise, we log that there are no dupes, and proceed with our process
@@ -83,7 +85,7 @@ def prep_telco_data(df):
                             drop_first=[True, True, True, True, True, True])
 
 
-    # rename columns
+    # rename columns that have been one hot encoded
     dummy_df = dummy_df.rename(columns={'partner_Yes': 'has_partner', 'dependents_Yes': 'has_dependents', 'phone_service_Yes': 'has_phone_service', 
                                         'paperless_billing_Yes': 'has_paperless_billing','churn_Yes': 'churned',
                                         'gender_Male': 'gender_female'
@@ -106,7 +108,11 @@ def prep_telco_data(df):
 
     df = df.drop(columns = cols_to_drop)
     
-    # split data into train, validate, test dataframes, stratified on the churn variable
+    #----------------------#
+    #     Split Data       #
+    #----------------------#
+
+    # split data into train, validate, test dataframes, stratified on the churn variable by calling the split telco function
     train, validate, test = split_telco(df, 'churned', seed=123)
 
     # Now that we have our 3 dataframes, print their shapes and return them    
