@@ -17,13 +17,14 @@ def prep_telco_data(df):
     '''
     # check for duplicates 
     num_dups = df.duplicated().sum()
-    # returns 0 rows
+    # if we found duplicate rows, we will remove them, log accordingly and proceed
     if num_dups > 0:
         print(f'There are {num_dups} duplicate rows in your dataset - these will be dropped.')
 
         print ('----------------')
         df = df.drop_duplicates()
     else:
+        # otherwise, we log that there are no dupes, and proceed with our process
         print(f'There are no duplicate rows in your dataset.')
 
         print('----------------')
@@ -105,9 +106,10 @@ def prep_telco_data(df):
 
     df = df.drop(columns = cols_to_drop)
     
-     # split data into train, validate, test dfs stratify churn
+    # split data into train, validate, test dataframes, stratified on the churn variable
     train, validate, test = split_telco(df, 'churned', seed=123)
-    
+
+    # Now that we have our 3 dataframes, print their shapes and return them    
     train.info()
 
     print ('----------------')
@@ -116,11 +118,11 @@ def prep_telco_data(df):
 
     print ('----------------')
 
-    print(f'Shape of test split: {train.shape}')
+    print(f'Shape of test split: {validate.shape}')
 
     print ('----------------')
 
-    print(f'Shape of validate split: {train.shape}')
+    print(f'Shape of validate split: {test.shape}')
 
     print ('----------------')
     
