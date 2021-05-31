@@ -176,10 +176,11 @@ During the analysis process, I made use of the following classification models:
 2. Random Forest
 3. KNN
 4. Logistic Regression
-My validation results indicated that the Logistic Regression model provided 80% accuracy in terms of churn prediction. It provided an overall accuracy of 80% and recall score of 50%, which outperformed the baseline of 73.47%.
+
+My validation results indicated that the Logistic Regression model provided 80% accuracy in terms of churn prediction. It provided an overall accuracy of 80% which outperformed the baseline of 73.47%.
 
 ## Next Steps
-If i had more time, I would:
+If I had more time, I would:
 * explore the outliers in more detail
 * examine factors leading to customers with higher monthly charges staying for longer tenures
 * explore premium services and their effect on churn more
