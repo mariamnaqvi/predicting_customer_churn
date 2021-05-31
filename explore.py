@@ -17,8 +17,8 @@ import scipy.stats as stats
 def explore_univariate(df, cat_vars, quant_vars):
     '''
     This function takes in categorical and quantitative variables from a dataframe.
-    It returns a bar plot for categorical variables.
-    It returns a histogram for quantitative variables.
+    It returns a bar plot for each categorical variable
+    and a histogram for each quantitative variable.
     '''
     
     # plot frequencies for each categorical variable
@@ -47,6 +47,7 @@ def generate_barplot(df, target, var):
     plt.axhline(overall_mean, ls = '--', color = 'grey')
     plt.show()
 
+
 def generate_hist(df, var):
     '''
     Helper function. Given a dataframe DF and a variable to plot, this function will 
@@ -59,6 +60,7 @@ def generate_hist(df, var):
     plt.ylabel('Customer count')
     plt.show()
 
+
 def generate_boxplot(df,target, var):
     '''
     Given a dataframe df, a target column and a variable to plot, this helper function
@@ -69,6 +71,7 @@ def generate_boxplot(df,target, var):
     plt.title('Boxplot of ' + var)
     plt.show()
 
+
 def generate_countplot(df, target, var):
     '''
     Another helper function used to display a plot. Given a dataframe df, a target
@@ -78,12 +81,18 @@ def generate_countplot(df, target, var):
     plt.tight_layout()
     plt.show()
 
+
 def explore_bivariate(df, target, cat_vars, quant_vars):
     '''
     This function takes in takes in a dataframe, the name of the binary target variable, a list of 
-    the names of the categorical variables and a list of the names of the quantitative variables.
-    For each categorical variable, a crosstab of frequencies is returned along with the results 
-    from a chi-square test that is run, and a barplot. .
+    the names of the categorical variables and a list of the names of the quantitative variables. It returns
+    bar plots and countplots for categorical variables and boxplots for quantitative variables.
+
+    For each categorical variable, the bar plot shows the churn rate for each class in each category
+    with a dotted line for the average overall churn rate. The countplots show the number of customers who churned 
+    and did not churn for each class in each category.
+
+    The boxplots show the relationship between quantitative variables and each class of the target variable.
     '''
     
     for var in cat_vars:
@@ -98,7 +107,10 @@ def explore_bivariate(df, target, cat_vars, quant_vars):
      
 def explore_multivariate(train, target, cat_vars, quant_vars):
     '''
-    
+    This function takes in takes in a dataframe, the name of the binary target variable, a list of 
+    the names of the categorical variables and a list of the names of the quantitative variables.
+    It generates boxplots showing the target variable for each class of the categorical variables 
+    against the quantitative variables.
     '''
     for cat in cat_vars:
         for quant in quant_vars:
