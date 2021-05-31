@@ -12,19 +12,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 import scipy.stats as stats
 
-# def train_validate_test_split(df, target, seed=123):
-#     '''
-#     This function takes in a dataframe, the target variable to stratify and a random seed. 
-#     It splits the original df into train, validate and test dataframes.
-#     Test dataset is 20% of the original dataset
-#     Train is 56% (0.7 * 0.8 = .56) of the original dataset
-#     Validate is 24% (0.3 * 0.7 = 0.24) of the original dataset
-#     '''
-#     train, test = train_test_split(df, test_size = 0.2, random_state = seed,
-#                                   stratify = df[target])
-#     train, validate = train_test_split(train, train_size = 0.7, random_state = seed,
-#                                   stratify = train[target])
-#     return train, validate, test
+
 
 def explore_univariate(df, cat_vars, quant_vars):
     '''
