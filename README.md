@@ -98,6 +98,7 @@ The overall process followed in this project, is as follows:
 6. Deliver
 
 ### 1. Plan
+* List of tasks in this Trello Board
 * Perform preliminary examination of the dataset
 * Collect database details (connection information and credentials)
 
@@ -159,10 +160,14 @@ In the above code, replace the `host`, `user` and `password` values with the cor
 Next, open the Jupyter notebook titled “final_report_telco” and execute the code within. 
 
 ## Key findings
-
+* Overall churn rate is at 27%
+* Monthly charges for customers who churn are 21% higher than customers who don't churn
+* Month to month contracts had the highest number of churning customers
 
 ## Recommendations
-
+* All my models predicted churn with an accuracy higher than the baseline model
+* My best model used Logistic Regression and can predict customers who will churn with 80% accuracy
+* Use this model to identify customers at risk of churning and provide them incentives to stay
 
 ## Takeaways
 During the analysis process, I made use of the following classification models:
@@ -170,6 +175,10 @@ During the analysis process, I made use of the following classification models:
 2. Random Forest
 3. KNN
 4. Logistic Regression
-My validation results indicated that the Logistic Regression model provided the highest accuracy in terms of churn prediction. It provided an accuracy of *VALUE*, which outperformed the baseline by *DIFFERENCE TO BASELINE*
+My validation results indicated that the Logistic Regression model provided 80% accuracy in terms of churn prediction. It provided an overall accuracy of 80% and recall score of 50%, which outperformed the baseline of 73.47%.
 
 ## Next Steps
+If i had more time, I would:
+* explore the outliers in more detail
+* examine factors leading to customers with higher monthly charges staying for longer tenures
+* explore premium services and their effect on churn more
