@@ -17,35 +17,35 @@ Perform modeling, analysis and testing to verify the accuracy of a classificatio
 Provide recommendations and suggestions to reduce overall customer churn and increase Telco’s revenue
 
 ## Initial Hypotheses
-*Hypotheses 1:* I accepted/rejected the null hypotheses; there is a difference in churn based on monthly charges
+*Hypotheses 1:* I rejected the null hypotheses; Mean monthly charges of customers who churned are higher
 * Confidence level = 0.99
 * Alpha = 1 - Confidence level = 0.01
-* H<sub>0</sub>: Mean monthly charges of customers who churned = Mean of monthly charges of all customers
-* H<sub>1</sub>: Mean monthly charges of customers who churned > Mean of monthly charges of all customers
+* H<sub>0</sub>: Mean monthly charges of customers who churned = Mean monthly charges of all customers
+* H<sub>1</sub>: Mean monthly charges of customers who churned > Mean monthly charges of all customers
 
-*Hypotheses 2:* I accepted/rejected the null hypotheses; there is a difference in churn based on customers using fiber optic internet
+*Hypotheses 2:* I rejected the null hypotheses; churn is not independent of customers using fiber optic internet
 * Confidence level = 0.99 
 * Alpha = 1 - Confidence level = 0.01
-* H<sub>0</sub>: Churn Rate is independent of having fiber optic internet
-* H<sub>1</sub>: Churn Rate is dependent on having fiber optic internet
+* H<sub>0</sub>: Churn is independent of having fiber optic internet
+* H<sub>1</sub>: Churn is not independent of having fiber optic internet
 
-*Hypotheses 3:* I accepted/rejected the null hypotheses; there is a difference in churn based on payment type
+*Hypotheses 3:* I rejected the null hypotheses; churn is not independent of payment type
 * Confidence level = 0.99 
 * Alpha = 1 - Confidence level = 0.01
 * H<sub>0</sub>: Churn is independent of payment type
 * H<sub>1</sub>: Churn is not independent of payment type
 
-*Hypotheses 4:* I accepted/rejected the null hypotheses; there is a difference in churn based on tenure and monthly charges
+*Hypotheses 4:* I rejected the null hypotheses; there is a linear correlation between tenure and monthly charges
 * Confidence level = 0.99
 * Alpha = 1 - Confidence level = 0.01
 * H<sub>0</sub>: There is no linear correlation between tenure and monthly charges.
 * H<sub>1</sub>: There is a linear correlation between tenure and monthly charges
 
-*Hypotheses 5:* I accepted/rejected the null hypotheses; there is a difference in churn based on contract type 
+*Hypotheses 5:* I rejected the null hypotheses; churn is not independent of mont-to-month contracts 
 * Confidence level = 0.99 
 * Alpha = 1 - Confidence level = 0.01
-* H<sub>0</sub>: Churn is independent of contract type
-* H<sub>1</sub>: Churn is not independent of contract type
+* H<sub>0</sub>: Churn is independent of month-to-month contracts
+* H<sub>1</sub>: Churn is not independent of month-to-month contracts
 
 ## Data Dictionary
 The following categories were initially collected from the database:
@@ -98,7 +98,7 @@ The overall process followed in this project, is as follows:
 6. Deliver
 
 ### 1. Plan
-* List of tasks in this Trello Board
+* List of tasks in <a href="https://trello.com/b/lU0bjeXw/predicting-customer-churn">this Trello Board</a>
 * Perform preliminary examination of the dataset
 * Collect database details (connection information and credentials)
 
@@ -147,7 +147,8 @@ The overall process followed in this project, is as follows:
 ## To recreate
 Simply clone the project locally and create an env.py file in the same folder as the cloned code. The format should be as follows:
 
-```host = ‘DB_HOST_IP’
+```
+host = ‘DB_HOST_IP’
 user =  ‘USERNAME’
 password = ‘PASSWORD’
 
