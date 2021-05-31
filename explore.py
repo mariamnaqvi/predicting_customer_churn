@@ -12,19 +12,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 import scipy.stats as stats
 
-def train_validate_test_split(df, target, seed=123):
-    '''
-    This function takes in a dataframe, the target variable to stratify and a random seed. 
-    It splits the original df into train, validate and test dataframes.
-    Test dataset is 20% of the original dataset
-    Train is 56% (0.7 * 0.8 = .56) of the original dataset
-    Validate is 24% (0.3 * 0.7 = 0.24) of the original dataset
-    '''
-    train, test = train_test_split(df, test_size = 0.2, random_state = seed,
-                                  stratify = df[target])
-    train, validate = train_test_split(train, train_size = 0.7, random_state = seed,
-                                  stratify = train[target])
-    return train, validate, test
+# def train_validate_test_split(df, target, seed=123):
+#     '''
+#     This function takes in a dataframe, the target variable to stratify and a random seed. 
+#     It splits the original df into train, validate and test dataframes.
+#     Test dataset is 20% of the original dataset
+#     Train is 56% (0.7 * 0.8 = .56) of the original dataset
+#     Validate is 24% (0.3 * 0.7 = 0.24) of the original dataset
+#     '''
+#     train, test = train_test_split(df, test_size = 0.2, random_state = seed,
+#                                   stratify = df[target])
+#     train, validate = train_test_split(train, train_size = 0.7, random_state = seed,
+#                                   stratify = train[target])
+#     return train, validate, test
 
 def explore_univariate(df, cat_vars, quant_vars):
     '''
@@ -47,6 +47,10 @@ def explore_univariate(df, cat_vars, quant_vars):
 
 
 def generate_barplot(df, target, var):
+    '''
+    Helper function to generate barplots. Given a dataframe df, a target column and a 
+    variable, this will generate and draw a barplot for that data set.
+    '''
     overall_mean = df[target].mean()
     sns.barplot(var, target, data=df, palette="twilight_shifted")
     plt.xlabel('')
@@ -56,6 +60,10 @@ def generate_barplot(df, target, var):
     plt.show()
 
 def generate_hist(df, var):
+    '''
+    Helper function. Given a dataframe DF and a variable to plot, this function will 
+    generate and display a histogram for that variable.
+    '''
     print ('Distribution of ' + var)
     df[var].hist()
     plt.grid(False)
@@ -64,12 +72,20 @@ def generate_hist(df, var):
     plt.show()
 
 def generate_boxplot(df,target, var):
+    '''
+    Given a dataframe df, a target column and a variable to plot, this helper function
+    will generate and display a boxplot comparing the given data elements.
+    '''
     plt.figure(figsize=(10,5))
     sns.boxplot(y=var, x=target, data=df,  palette="twilight_shifted")
     plt.title('Boxplot of ' + var)
     plt.show()
 
 def generate_countplot(df, target, var):
+    '''
+    Another helper function used to display a plot. Given a dataframe df, a target
+    column and a variable, this function will create and display a countplot.
+    '''
     sns.countplot(data=df, x=var, hue=target,  palette="twilight_shifted")
     plt.tight_layout()
     plt.show()
@@ -93,6 +109,9 @@ def explore_bivariate(df, target, cat_vars, quant_vars):
         
      
 def explore_multivariate(train, target, cat_vars, quant_vars):
+    '''
+    
+    '''
     for cat in cat_vars:
         for quant in quant_vars:
             sns.boxplot(x=train[cat], y=quant, data=train, hue=target, palette="twilight_shifted")
