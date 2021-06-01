@@ -162,6 +162,7 @@ Next, open the Jupyter notebook titled “final_report_telco” and execute the 
 
 ## Key findings
 * Overall churn rate is at 27%
+* Churn Rate decreases as tenure increases
 * Monthly charges for customers who churn are 21% higher than customers who don't churn
 * Month to month contracts had the highest number of churning customers
 
